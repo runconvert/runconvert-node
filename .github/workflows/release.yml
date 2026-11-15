@@ -1,0 +1,32 @@
+# Publishes to npm when a version tag is pushed:
+#   1. bump "version" in package.json and CHANGELOG.md, merge to main
+#   2. gh release create v0.2.0 --target main   (or: git tag v0.2.0 && git push origin v0.2.0)
+#   3. approve the "release" environment in the Actions tab
+# Uses npm trusted publishing (OIDC): no npm token is stored anywhere.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: release
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      # Trusted publishing needs npm 11.5.1 or newer.
+      - run: npm install -g npm@latest
+      - run: npm ci
+      - run: npm test
+      - name: The tag matches package.json
+        run: test "v$(node -p 'require("./package.json").version')" = "$GITHUB_REF_NAME"
+      - run: npm publish --provenance --access public

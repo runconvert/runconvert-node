@@ -166,6 +166,12 @@ RUNCONVERT_API_KEY=rc_live_… npm run test:live   # real API, about 2 credits
 
 The API this SDK follows is described in OpenAPI 3.1 (`docs/openapi/runconvert-v3.yaml` in the backend repo).
 
+## Releasing
+
+Bump `version` in `package.json` and `CHANGELOG.md`, merge, then `gh release create vX.Y.Z --target main`.
+The Release workflow tests, checks the tag matches the version, waits for approval and publishes to npm
+with provenance (trusted publishing, no token).
+
 ## License
 
 MIT
