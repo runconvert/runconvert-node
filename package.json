@@ -2,7 +2,6 @@
   "name": "@runconvert/sdk",
   "version": "0.1.0",
   "description": "Official RunConvert SDK for Node.js: convert files between 240+ formats",
-  "private": true,
   "publishConfig": { "access": "public" },
   "license": "MIT",
   "homepage": "https://www.runconvert.com/docs",
