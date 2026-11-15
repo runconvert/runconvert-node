@@ -1,0 +1,33 @@
+{
+  "name": "runconvert",
+  "version": "0.1.0",
+  "description": "Official RunConvert SDK for Node.js: convert files between 240+ formats",
+  "private": true,
+  "license": "MIT",
+  "homepage": "https://www.runconvert.com/docs",
+  "repository": { "type": "git", "url": "git+https://github.com/runconvert/runconvert-node.git" },
+  "keywords": ["runconvert", "file converter", "convert", "pdf", "video", "image", "api", "sdk"],
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": { "types": "./dist/esm/index.d.ts", "default": "./dist/esm/index.js" },
+      "require": { "types": "./dist/cjs/index.d.ts", "default": "./dist/cjs/index.js" }
+    }
+  },
+  "files": ["dist"],
+  "engines": { "node": ">=18" },
+  "sideEffects": false,
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json && tsc -p tsconfig.cjs.json && echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test test/unit.test.mjs",
+    "test:live": "npm run build && node --test test/live.test.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "20.16.11",
+    "typescript": "5.6.3"
+  }
+}
