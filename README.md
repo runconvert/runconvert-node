@@ -4,11 +4,11 @@ Convert files between 240+ formats (3,000+ conversions) with the [RunConvert API
 documents, images, video, audio, ebooks, archives, fonts and CAD. Typed, no dependencies, Node.js 18+.
 
 ```bash
-npm install runconvert
+npm install @runconvert/sdk
 ```
 
 ```ts
-import { RunConvert } from "runconvert";
+import { RunConvert } from "@runconvert/sdk";
 
 const rc = new RunConvert({ apiKey: process.env.RUNCONVERT_API_KEY });
 
@@ -65,12 +65,12 @@ const done = await rc.jobs.wait(job.id);
 for (const file of Jobs.exportedFiles(done)) await rc.files.download(file, "out");
 ```
 
-(`Jobs` is exported too: `import { RunConvert, Jobs } from "runconvert"`.)
+(`Jobs` is exported too: `import { RunConvert, Jobs } from "@runconvert/sdk"`.)
 
 Uploading your own file:
 
 ```ts
-import { Jobs } from "runconvert";
+import { Jobs } from "@runconvert/sdk";
 
 const job = await rc.jobs.create({
   tasks: {
@@ -105,7 +105,7 @@ Verify the `X-RunConvert-Signature` header against the **raw** body before using
 
 ```ts
 import express from "express";
-import { constructEvent } from "runconvert";
+import { constructEvent } from "@runconvert/sdk";
 
 app.post("/webhooks/runconvert", express.raw({ type: "application/json" }), (req, res) => {
   let event;
@@ -130,7 +130,7 @@ app.post("/webhooks/runconvert", express.raw({ type: "application/json" }), (req
 | `WaitTimeoutError` | `wait` ran past its `timeout` |
 
 ```ts
-import { RunConvertError, JobFailedError } from "runconvert";
+import { RunConvertError, JobFailedError } from "@runconvert/sdk";
 
 try {
   await rc.convert("song.ncm", { to: "mp3" });
