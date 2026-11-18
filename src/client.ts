@@ -11,7 +11,7 @@ import type {
 } from "./types.js";
 import { constructEvent, verifySignature } from "./webhooks.js";
 
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.0"; // x-release-please-version
 
 export interface ClientOptions {
   /** API key from Dashboard → API Keys. Defaults to the RUNCONVERT_API_KEY environment variable. */
